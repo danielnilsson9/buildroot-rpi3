@@ -1,0 +1,22 @@
+# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8) 
+
+# The loopback interface
+auto lo
+iface lo inet loopback
+
+# Wireless interfaces
+#auto wlan0
+iface wlan0 inet dhcp
+	wireless-essid any
+	pre-up wpa_supplicant -i wlan0 -c /etc/wpa_supplicant.conf -B 
+	post-down killall -q wpa_supplicant
+
+
+# Wired interfaces
+auto eth0
+iface eth0 inet static
+	address 169.254.3.14
+	netmask 255.255.0.0
+
+#auto eth0:1
+iface eth0:1 inet dhcp

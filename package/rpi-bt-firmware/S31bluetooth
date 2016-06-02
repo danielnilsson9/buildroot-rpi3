@@ -24,10 +24,6 @@ SSD_OPTIONS="--oknodo --quiet --exec $DAEMON -- --compat"
 
 test -f $DAEMON || exit 0
 
-run_sdptool()
-{
-	$SDPTOOL add SP
-}
 
 hci_attach()
 {
@@ -47,9 +43,6 @@ case $1 in
 	hci_attach	
 	
 	start-stop-daemon --start --background $SSD_OPTIONS
-	
-	sleep 2
-	run_sdptool
 	
   ;;
   stop)

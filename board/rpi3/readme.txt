@@ -3,7 +3,15 @@ Raspberry Pi 3
 Intro
 =====
 
-These instructions only apply for Raspberry Pi 3.
+Minimal Raspberry Pi 3 image based on the standard
+board package for Raspberry Pi. Drivers for the 
+built in WIFI and Bluetooth chips has been added
+as packages and are enabled by default. A slimmed
+defconfig file for the kernel is located in:
+
+   board/rpi3/kernel/rpi3_minimal_defconfig
+
+
 
 How to build it
 ===============
@@ -11,20 +19,11 @@ How to build it
 Configure Buildroot
 -------------------
 
-There are two RaspberryPi defconfig files in Buildroot, one for each
-major variant, which you should base your work on:
+A defconfig file for Raspberry Pi 3 has been created which
+you should base your work on. Load it by executing:
 
-For models A, B, A+ or B+:
+   $ make rpi3_defconfig
 
-  $ make raspberrypi_defconfig
-
-For model 2 B:
-
-  $ make raspberrypi2_defconfig
-
-For model 3 B:
-
-  $ make raspberrypi3_defconfig
 
 Build the rootfs
 ----------------
@@ -44,12 +43,9 @@ Result of the build
 After building, you should obtain this tree:
 
     output/images/
-    +-- bcm2708-rpi-b.dtb           [1]
-    +-- bcm2708-rpi-b-plus.dtb      [1]
-    +-- bcm2709-rpi-2-b.dtb         [1]
-    +-- bcm2710-rpi-3-b.dtb         [1]
+    +-- bcm2710-rpi-3-b.dtb
     +-- boot.vfat
-    +-- kernel-marked/zImage        [2]
+    +-- kernel-marked/zImage        [1]
     +-- rootfs.ext4
     +-- rpi-firmware/
     |   +-- bootcode.bin
@@ -60,10 +56,7 @@ After building, you should obtain this tree:
     +-- sdcard.img
     `-- zImage
 
-[1] Not all of them will be present, depending on the RaspberryPi
-    model you are using.
-
-[2] This is the mkknlimg DT-marked kernel.
+[1] This is the mkknlimg DT-marked kernel.
 
 How to write the SD card
 ========================
@@ -75,7 +68,4 @@ Copy the bootable "sdcard.img" onto an SD card with "dd":
 
   $ sudo dd if=output/images/sdcard.img of=/dev/sdX
 
-Insert the SDcard into your Raspberry Pi, and power it up. Your new system
-should come up now and start two consoles: one on the serial port on
-the P1 header, one on the HDMI output where you can login using a USB
-keyboard.
+Insert the SDcard into your Raspberry Pi, and power it up.

@@ -14,4 +14,6 @@ cp board/rpi3/boot/config.txt ${BINARIES_DIR}/rpi-firmware/config.txt
 # Replace cmdline.txt file with custom file in boot/cmdline.txt
 cp board/rpi3/boot/cmdline.txt ${BINARIES_DIR}/rpi-firmware/cmdline.txt
 
+rm ${TARGET_DIR}/etc/network/nfs_check
+
 
