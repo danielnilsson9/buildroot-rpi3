@@ -22,7 +22,7 @@ Configure Buildroot
 A defconfig file for Raspberry Pi 3 has been created which
 you should base your work on. Load it by executing:
 
-   $ make rpi3_defconfig
+   $ make rpi3_minimal_defconfig
 
 
 Build the rootfs
